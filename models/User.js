@@ -1,6 +1,11 @@
-const {Schema, model} = require("mongoose");
+const {Schema, model, Types} = require("mongoose");
 
 //name, user's name, timestamp pizza created, timestamp pizza updates, pizza size, pizza toppings
+var validateEmail = function(email) {
+    var regex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+    return regex.test(email)
+};
+
 
 const UserSchema = new Schema(
     {
@@ -14,7 +19,7 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: [validateEmail, "Please enter a valid email address"],
+            validate: [validateEmail, "Please fill a valid email address"],
             match:[ /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, "Please enter a valid email address"],
         },
         thoughts: [
